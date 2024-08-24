@@ -1,119 +1,123 @@
-{% extends 'volunteers/base_volunteer.html' %}
+{% extends 'volunteers/base_volunteers.html' %}
 
 {% block title %}Volunteer Dashboard{% endblock %}
 
 {% block content %}
-<div class="dashboard">
+{% load static %}
+
+<!-- Banner Area -->
+<section id="common_banner_area">
     <div class="container">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3">
-                <div class="sidebar">
-                    <h3>Dashboard</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="{% url 'volunteer_dashboard' %}">Home</a></li>
-                        <li class="list-group-item"><a href="{% url 'volunteer_profile_edit' %}">Edit Profile</a></li>
-                        <li class="list-group-item"><a href="{% url 'complaint_submission' %}">Submit Complaint</a></li>
-                        <li class="list-group-item"><a href="{% url 'package_status' %}">Package Status</a></li>
-                        <li class="list-group-item"><a href="{% url 'message_inbox' %}">Inbox</a></li>
+            <div class="col-lg-12">
+                <div class="commn_banner_page">
+                    <h2>Welcome <span class="color_big_heading">{{ volunteer.first_name }}</span></h2>
+                    <ul class="breadcrumb_wrapper">
+                        <li class="breadcrumb_item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb_item"><img src="{% static 'assets/img/icon/arrow.png' %}" alt="img"></li>
+                        <li class="breadcrumb_item active">Dashboard</li>
                     </ul>
-                </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="col-md-9">
-                <div class="dashboard-content">
-                    <h2>Welcome, {{ user.first_name }}!</h2>
-
-                    <!-- Shipment Updates -->
-                    <div class="section">
-                        <h3>Shipment Updates</h3>
-                        {% if packages %}
-                        <ul class="list-group">
-                            {% for package in packages %}
-                            <li class="list-group-item">
-                                <strong>Tracking Number:</strong> {{ package.tracking_number }}<br>
-                                <strong>Status:</strong> {{ package.get_status_display }}<br>
-                                <strong>Shipped Date:</strong> {{ package.shipped_date }}<br>
-                                <strong>Received Date:</strong> {{ package.received_date|default:"Not Received" }}<br>
-                                <strong>Notes:</strong> {{ package.notes|default:"No Notes" }}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <p>No shipments found.</p>
-                        {% endif %}
-                    </div>
-
-                    <!-- Inbox -->
-                    <div class="section">
-                        <h3>Inbox</h3>
-                        {% if messages %}
-                        <ul class="list-group">
-                            {% for message in messages %}
-                            <li class="list-group-item">
-                                <strong>Subject:</strong> {{ message.subject }}<br>
-                                <strong>Date:</strong> {{ message.sent_date }}<br>
-                                <strong>Read:</strong> {% if message.is_read %} Yes {% else %} No {% endif %}
-                                <p>{{ message.body|truncatewords:20 }}</p>
-                                <a href="{% url 'message_detail' message.id %}" class="btn btn-primary">Read More</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <p>No messages found.</p>
-                        {% endif %}
-                    </div>
-
-                    <!-- Complaints -->
-                    <div class="section">
-                        <h3>Complaints</h3>
-                        {% if complaints %}
-                        <ul class="list-group">
-                            {% for complaint in complaints %}
-                            <li class="list-group-item">
-                                <strong>Subject:</strong> {{ complaint.subject }}<br>
-                                <strong>Date:</strong> {{ complaint.submitted_date }}<br>
-                                <strong>Status:</strong> {{ complaint.get_status_display }}
-                                <p>{{ complaint.description|truncatewords:20 }}</p>
-                                <a href="{% url 'complaint_detail' complaint.id %}" class="btn btn-primary">View Details</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <p>No complaints found.</p>
-                        {% endif %}
-                    </div>
-
-                    <!-- Personal Information -->
-                    <div class="section">
-                        <h3>Personal Information</h3>
-                        <ul class="list-unstyled">
-                            <li><strong>Full Name:</strong> {{ user.get_full_name }}</li>
-                            <li><strong>Email:</strong> {{ user.email }}</li>
-                            <li><strong>Phone Number:</strong> {{ user.phone_number }}</li>
-                            <li><strong>Address:</strong> {{ user.address }}</li>
-                            <li><strong>Country:</strong> {{ user.country }}</li>
-                            <li><strong>Passport Number:</strong> {{ user.passport_number }}</li>
-                            <li><strong>Organization:</strong> {{ user.organization.name|default:"No Organization" }}</li>
-                        </ul>
-                    </div>
-
-                    <!-- Organization Details -->
-                    <div class="section">
-                        <h3>Organization Details</h3>
-                        {% if user.organization %}
-                        <ul class="list-unstyled">
-                            <li><strong>Organization Name:</strong> {{ user.organization.name }}</li>
-                            <li><strong>Description:</strong> {{ user.organization.description }}</li>
-                        </ul>
-                        {% else %}
-                        <p>No organization details available.</p>
-                        {% endif %}
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Volunteer Dashboard Area -->
+<section id="volunteer_dashboard_area" class="section_padding">
+    <div class="container">
+        <!-- Personal Information Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section_heading text-right">
+                    <h3>Personal Information</h3>
+                </div>
+                <div class="row">
+                    <!-- First Column (Profile Picture and Username) -->
+                    <div class="col-lg-2 col-md-3 text-center">
+                        <img src="{% static 'assets/img/profile_placeholder.png' %}" alt="Profile Picture" class="rounded-circle img-fluid">
+                        <p>{{ volunteer.username }}</p>
+                    </div>
+                    <!-- Second Column (Name, Date of Birth, Email, Address, Passport) -->
+                    <div class="col-lg-5 col-md-6">
+                        <p><strong>Name:</strong> {{ volunteer.first_name }} {{ volunteer.last_name }}</p>
+                        <p><strong>Date of Birth:</strong> {{ volunteer.date_of_birth }}</p>
+                        <p><strong>Email:</strong> {{ volunteer.email }}</p>
+                        <p><strong>Address:</strong> {{ volunteer.address }}</p>
+                        <p><strong>Passport Number:</strong> {{ volunteer.passport_number }}</p>
+                    </div>
+                    <!-- Third Column (Country, Phone, Organizations) -->
+                    <div class="col-lg-5 col-md-6">
+                        <p><strong>Country:</strong> {{ volunteer.country }}</p>
+                        <p><strong>Phone:</strong> {{ volunteer.phone_number }}</p>
+                        <p><strong>Organizations:</strong> 
+                            {% for org in volunteer.organizations %}
+                                {{ org.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tiles Section -->
+        <div class="row mt-4">
+            <!-- Packages Tile -->
+            <div class="col-lg-4">
+                <div class="tile">
+                    <i class="fas fa-box-open fa-3x"></i>
+                    <h4>Packages</h4>
+                    <p>{{ packages.count }} Packages</p>
+                </div>
+            </div>
+            <!-- Complaints Tile -->
+            <div class="col-lg-4">
+                <div class="tile">
+                    <i class="fas fa-comments fa-3x"></i>
+                    <h4>Complaints</h4>
+                    <p>{{ complaints.count }} Complaints</p>
+                </div>
+            </div>
+            <!-- Messages Tile -->
+            <div class="col-lg-4">
+                <div class="tile">
+                    <i class="fas fa-envelope fa-3x"></i>
+                    <h4>Messages</h4>
+                    <p>{{ messages.count }} Messages</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <!-- Recent Activity Tile -->
+                <div class="recent_activity">
+                    <h4>Recent Activity</h4>
+                    {% for activity in recent_activities %}
+                        <div class="activity_item">
+                            <p>{{ activity.description }}</p>
+                            <small>{{ activity.timestamp }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Subscribe Section -->
+            <div class="col-lg-4">
+                <div class="subscribe_area">
+                    <p>Newsletter</p>
+                    <h4>Subscribe for Updates</h4>
+                    <form action="#!" id="subscribe_form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Your mail address" required="">
+                            <button class="btn btn_theme btn_md" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

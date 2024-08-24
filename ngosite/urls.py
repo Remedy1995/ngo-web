@@ -1,4 +1,5 @@
-from django.urls import path
+# ngosite/urls.py
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -8,4 +9,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('volunteer/', views.volunteer, name='volunteer'),
     path('volunteer_login/', views.volunteer_login, name='volunteer_login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('volunteers/', include('volunteers.urls')),  # Include the volunteers app URLs
 ]

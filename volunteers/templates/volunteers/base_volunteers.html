@@ -7,9 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    {% block title %}
-    
-    {% endblock %}
+    <title> {% block title %} My Site {% endblock %}</title>
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
     <!-- animate css -->
@@ -99,7 +97,7 @@
                     <div class="main-responsive-menu">
                         <div class="logo">
                             <a href="{% url 'volunteer_dashboard' %}">
-                                <img src="{% static 'assets/img/logo.png' %}" alt="logo">
+                                <img src="{% static 'assets/img/Logo_of_UNICEF.png' %}" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -109,7 +107,7 @@
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
                         <a class="navbar-brand" href="{% url 'volunteer_dashboard' %}">
-                            <img src="{% static 'assets/img/logo.png' %}" alt="logo">
+                            <img src="{% static 'assets/img/Logo_of_UNICEF.png' %}" alt="logo">
                         </a>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">
@@ -146,7 +144,10 @@
                                     </a>
                                 </div>
                                 <div class="option-item">
-                                    <a href="{% url 'logout' %}" class="btn btn_navber">Logout</a>
+                                    <form id="logout-form" method="POST" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn_navber">Logout</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +168,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12 col-12">
                         <div class="footer_area_about">
-                            <img src="{% static 'assets/img/logo.png' %}" alt="img">
+                            <img src="{% static 'assets/img/Logo_of_UNICEF.png' %}" alt="img">
                             <p>Lorem ipsum dolor sit amet consec elit sed eiusmod tempor incididunt ut labore etdolore magna
                                 aliqua.</p>
                             <h6><strong>Address:</strong> 858 Walnutwood Ave. Webster, NY 14580</h6>

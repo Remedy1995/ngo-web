@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import VolunteerUser, Message, Complaint, Organization
+from .models import VolunteerUser, Message, Complaint, Organization, Package
 
 admin.site.register(VolunteerUser)
 
@@ -19,3 +19,9 @@ class ComplaintAdmin(admin.ModelAdmin):
 class OrganizationAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')
     search_fields = ('name', 'description')
+
+@admin.register(Package)
+class PackageAdmin(admin.ModelAdmin):
+    list_display = ('volunteer', 'tracking_number', 'status', 'shipped_date', 'received_date')
+    list_filter = ('status', 'shipped_date', 'received_date')
+    search_fields = ('tracking_number', 'notes')

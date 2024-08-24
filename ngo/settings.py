@@ -130,3 +130,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'volunteers.VolunteerUser'
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'  # URL where users are redirected to log in
+LOGIN_REDIRECT_URL = '/volunteers/dashboard/'  # URL where users are redirected after logging in
