@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+UNICEF Group Volunteer
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<!-- Banner Area -->
+<section id="common_banner_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="commn_banner_page">
+                    <h2>Join as a <span class="color_big_heading">Volunteer</span></h2>
+                    <ul class="breadcrumb_wrapper">
+                        <li class="breadcrumb_item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb_item"><img src="{% static 'assets/img/icon/arrow.png' %}" alt="img"></li>
+                        <li class="breadcrumb_item active">Join Volunteer Program</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Join Volunteer Area -->
+<section id="join_volunteer_area" class="section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="section_heading">
+                    <h3>Join Us</h3>
+                    <h2><span class="color_big_heading">Become a Volunteer</span> now to make a difference</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="counter">
+            <div class="col-lg-8">
+                <div class="details_wrapper_area">
+                    <div class="join_area_content">
+                        <h3>Join Now</h3>
+                        <p>If you want to join our team of volunteers, click the button below to either register or log in.</p>
+                    </div>
+                    <div class="join_now_button_area">
+                        <a href="login_or_register.html" class="btn btn_theme btn_md">Join Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar_first">
+                    <div class="case_boxed_wrapper">
+                        <div class="case_boxed_img">
+                            <a href="#"><img src="{% static 'assets/img/causes/causes-1.png' %}" alt="img"></a>
+                            <span class="causes_badge bg-theme">Join Us</span>
+                        </div>
+                        <div class="causes_boxed_text">
+                            <h3><a href="#">Make a Difference</a></h3>
+                            <p>By joining as a volunteer, you can help make a significant impact on the lives of many.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Subscribe Area -->
+<section id="subscribe_area">
+    <div class="container">
+        <div class="subscribe_wrapper">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="subscribe_text">
+                        <p>Newsletter</p>
+                        <h3>To get weekly & monthly updates,
+                            <span class="color_big_heading">Subscribe</span> to our newsletter.
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cta_right_side">
+                        <form action="#!" id="subscribe_form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Your email address" required="">
+                                <button class="btn btn_theme btn_md" type="submit">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+ 
+# Virtual environment
+venv/
+env/
+.env/
+ 
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+ 
+# If using Pipenv
+Pipfile.lock
+ 
+# If using Poetry
+poetry.lock
+ 
+# VS Code settings
+.vscode/
+ 
+# macOS
+.DS_Store
+ 
+# Windows
+Thumbs.db
